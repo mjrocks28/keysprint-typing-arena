@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#0b1221" />
+    <title>KeySprint — Neon Typing Arena</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;600;700&family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <canvas id="bgCanvas" class="bg-canvas" aria-hidden="true"></canvas>
+    <div class="layout">
+      <div class="container">
+        <h1 class="title"><span class="emoji">⚡</span> KeySprint</h1>
+        <p class="subtitle">Master the neon typing arena. Race the clock, crush words, and climb your WPM.</p>
+
+        <!-- Controls: Time + Difficulty -->
+        <div class="controls">
+            <div id="timeSelect" class="control">
+                <label for="timeLimit">Time Limit</label>
+                <select id="timeLimit">
+                    <option value="30">30 seconds</option>
+                    <option value="60">1 minute</option>
+                    <option value="120" selected>2 minutes</option>
+                    <option value="180">3 minutes</option>
+                    <option value="300">5 minutes</option>
+                </select>
+            </div>
+            <div id="difficultySelect" class="control">
+                <label for="difficulty">Difficulty</label>
+                <select id="difficulty">
+                    <option value="easy">Easy</option>
+                    <option value="medium" selected>Medium</option>
+                    <option value="hard">Hard</option>
+                    <option value="warrior">Keyboard Warrior</option>
+                </select>
+            </div>
+        </div>
+
+        <div id="timerBar" class="progress" aria-label="Time remaining">
+            <div id="progressFill" class="progress-fill"></div>
+            <div class="progress-label"><span id="time">120</span>s</div>
+        </div>
+        <p id="quote" class="quote"></p>
+        <textarea id="input" placeholder="Start typing here..." disabled></textarea>
+        
+        <div class="stats">
+            <p class="badge"><span class="label">WPM</span> <span id="wpm">0</span></p>
+            <p class="badge"><span class="label">Words</span> <span id="wordsTyped">0</span></p>
+        </div>
+
+        <button id="startBtn" class="cta">Start Typing</button>
+      </div>
+
+      <aside class="sidebar">
+        <h3 class="panel-title">Scoreboard</h3>
+        <div id="scoreboard" class="scoreboard">
+            <div class="best">
+                <div class="best-grid">
+                    <p class="badge">
+                        <span class="label">Best (All)</span>
+                        <span id="bestWPM">0</span> WPM •
+                        <span id="bestWords">0</span> words •
+                        <span id="bestTime">0</span>s
+                    </p>
+                    <p class="badge">
+                        <span class="label">Easy</span>
+                        <span id="bestEasyWPM">0</span> WPM •
+                        <span id="bestEasyWords">0</span> words •
+                        <span id="bestEasyTime">0</span>s
+                    </p>
+                    <p class="badge">
+                        <span class="label">Medium</span>
+                        <span id="bestMediumWPM">0</span> WPM •
+                        <span id="bestMediumWords">0</span> words •
+                        <span id="bestMediumTime">0</span>s
+                    </p>
+                    <p class="badge">
+                        <span class="label">Hard</span>
+                        <span id="bestHardWPM">0</span> WPM •
+                        <span id="bestHardWords">0</span> words •
+                        <span id="bestHardTime">0</span>s
+                    </p>
+                    <p class="badge">
+                        <span class="label">Keyboard Warrior</span>
+                        <span id="bestWarriorWPM">0</span> WPM •
+                        <span id="bestWarriorWords">0</span> words •
+                        <span id="bestWarriorTime">0</span>s
+                    </p>
+                </div>
+            </div>
+            <ul id="recentList" class="recent-list"></ul>
+        </div>
+      </aside>
+    </div>
+
+    <!-- Popup -->
+    <div id="popup" class="popup hidden">
+        <div class="popup-content">
+            <button id="closePopupBtn" class="close-btn" aria-label="Close popup">✕</button>
+            <div class="trophy">🏆</div>
+            <h2>Time's Up!</h2>
+            <p>You typed <span id="finalWords">0</span> words</p>
+            <p>Your speed: <span id="finalWPM">0</span> WPM</p>
+            <button id="restartBtn" class="cta small">Play Again</button>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.0/dist/confetti.browser.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
