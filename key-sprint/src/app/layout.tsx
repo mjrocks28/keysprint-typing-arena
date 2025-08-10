@@ -15,6 +15,9 @@ const chakra = Chakra_Petch({
 
 export const metadata: Metadata = {
   title: "KeySprint — Neon Typing Arena",
+};
+
+export const viewport = {
   themeColor: "#0b1221",
 };
 
