@@ -24,7 +24,7 @@ jobs:
 
       - name: Build & Export Next.js
         working-directory: ./key-sprint
-        run: npm run build && npm run export
+        run: npm run build
 
       # --- Prepare combined output ---
       - name: Copy static HTML site
