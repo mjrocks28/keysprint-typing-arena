@@ -1,7 +1,9 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
+  output: 'export',
+  basePath: '/keysprint-typing-arena/next', // repo name + subfolder
+  images: { unoptimized: true }
 };
 
 export default nextConfig;

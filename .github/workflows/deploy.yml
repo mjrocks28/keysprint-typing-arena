@@ -1,0 +1,41 @@
+name: Deploy both HTML and Next.js to GitHub Pages
+
+on:
+  push:
+    branches: [ main ] # change if your default branch is different
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      # --- Build Next.js ---
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 20
+
+      - name: Install dependencies (Next.js)
+        working-directory: ./key-sprint
+        run: npm install
+
+      - name: Build & Export Next.js
+        working-directory: ./key-sprint
+        run: npm run build && npm run export
+
+      # --- Prepare combined output ---
+      - name: Copy static HTML site
+        run: mkdir public && cp -r index.html script.js style.css README.md public/
+
+      - name: Copy Next.js export into subfolder
+        run: mkdir -p public/next && cp -r key-sprint/out/* public/next/
+
+      # --- Deploy ---
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./public
