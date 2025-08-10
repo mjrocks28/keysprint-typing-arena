@@ -2,7 +2,8 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   output: 'export',
-  basePath: '/keysprint-typing-arena/next', // repo name + subfolder
+  basePath: '/keysprint-typing-arena', // Replace with your repo name
+  assetPrefix: '/keysprint-typing-arena/',
   images: { unoptimized: true }
 };
 
